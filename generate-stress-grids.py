@@ -156,6 +156,7 @@ for i in range(0,natoms) :
     points.InsertPoint(i,atomX[i], atomY[i],atomZ[i]);
     
 scalars = vtk.vtkFloatArray()
+scalars.SetName("potentialEnergy")
 
 for i in range(0,natoms) : 
     
@@ -165,7 +166,7 @@ profile = vtk.vtkPolyData()
 profile.SetPoints(points)
 profile.GetPointData().SetScalars(scalars)
 
-dim = 51
+dim = 21
 
 shepard1 = vtk.vtkShepardMethod()
 shepard1.SetInputData(profile)
@@ -179,6 +180,11 @@ timer = vtk.vtkExecutionTimer()
 timer.SetFilter(shepard1)
 shepard1.Update()
 wallClock = timer.GetElapsedWallClockTime()
-print ("Shephard (P=1):", wallClock)
+print ("Shephard (P=2):", wallClock)
 
+xmlWriter = vtk.vtkXMLImageDataWriter()
+outputFilename = "interpolate.vti";
+xmlWriter.SetFileName(outputFilename);
+xmlWriter.SetInputConnection(shepard1.GetOutputPort());
+xmlWriter.Write();
 
