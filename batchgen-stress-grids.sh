@@ -8,6 +8,6 @@ do
     echo Running input file : $n
     filenamedump="dump.stress.$n"
     filenamecube="$n.cube"
-    python generate-stress-grids.py $filenamedump $filenamecube $counter
+    python generate-stress-grids.py $filenamedump $filenamecube $counter &
     let counter++
 done
