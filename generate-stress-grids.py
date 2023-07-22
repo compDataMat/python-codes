@@ -16,6 +16,7 @@ filters of paraview such as contouring,
 import vtk
 import numpy as np
 import os
+import sys
 
 ##############################################################################
 # Parameters for the shepherd method:
@@ -31,12 +32,17 @@ powerParameter = 2;
 
 ##############################################################################
 
+if (len(sys.argv) != 4):
+
+    print(sys.argv)
+    print("Enter three arguments, the dump.stress file, .cube file and a counter int (give 0 if only one file)");
+    exit();
 
 # Let us first read the dump.stress. file from LAMMPS:
-path  = "/Users/aditya/Documents/pormetalomics/testing-poreTDA/gold-structure";
+path  = "/home/aditya/Documents/israel-structures/generation-of-distance-functions/stress-grids";
 os.chdir(path);
 
-filename = "dump.stress.75000";
+filename = sys.argv[1];
 
 h = open(filename, 'r')
 
@@ -109,7 +115,7 @@ for line in content:
 
 # We will also read the distance grid that is actually generated from zeoplusplus. 
 # Load the  cube file
-filenameDistanceGrid = "15.cube";
+filenameDistanceGrid = sys.argv[2];
 
 h = open(filenameDistanceGrid, 'r')
 content = h.readlines()
@@ -435,7 +441,8 @@ for i in range(0,dimX):
 
 
 gridWriter = vtk.vtkXMLImageDataWriter();
-outputFileName = "grid.vti";
+filecounter = sys.argv[3];
+outputFileName = "grid_" + filecounter + ".vti";
 gridWriter.SetFileName(outputFileName);
 gridWriter.SetInputData(grid);
 gridWriter.Write();
