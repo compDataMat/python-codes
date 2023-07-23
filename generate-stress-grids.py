@@ -359,6 +359,7 @@ print ("Shephard sigmaYZ completed in :", wallClock)
 # We create next the image grid to store the interpolated values.
 grid = vtk.vtkImageData();
 grid.SetExtent(0,dimX-1, 0, dimY-1, 0, dimZ-1);
+grid.SetSpacing(gridresA,gridresB,gridresC);
 
 
 distanceGrid = vtk.vtkDoubleArray();
