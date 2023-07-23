@@ -443,7 +443,14 @@ for i in range(0,dimX):
 
 gridWriter = vtk.vtkXMLImageDataWriter();
 filecounter = sys.argv[3];
-outputFileName = "grid_" + filecounter + ".vti";
+
+fileindex ="";
+if (filecounter < 10):
+    fileindex = str(0)+str(0)+filecounter;
+el if (filecounter < 100):
+    fileindex = str(0) + filecounter;
+
+outputFileName = "grid_" + fileindex + ".vti";
 gridWriter.SetFileName(outputFileName);
 gridWriter.SetInputData(grid);
 gridWriter.Write();
