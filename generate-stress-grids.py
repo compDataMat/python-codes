@@ -32,10 +32,10 @@ powerParameter = 2;
 
 ##############################################################################
 
-if (len(sys.argv) != 4):
+if (len(sys.argv) != 3):
 
     print(sys.argv)
-    print("Enter three arguments, the dump.stress file, .cube file and a counter int (give 0 if only one file)");
+    print("Takes two arguments, the dump.stress file and .cube file");
     exit();
 
 # Let us first read the dump.stress. file from LAMMPS:
@@ -442,15 +442,7 @@ for i in range(0,dimX):
 
 
 gridWriter = vtk.vtkXMLImageDataWriter();
-filecounter = sys.argv[3];
-
-fileindex ="";
-if (filecounter < 10):
-    fileindex = str(0)+str(0)+filecounter;
-el if (filecounter < 100):
-    fileindex = str(0) + filecounter;
-
-outputFileName = "grid_" + fileindex + ".vti";
+outputFileName = "grid_" + str(timestamp) + ".vti";
 gridWriter.SetFileName(outputFileName);
 gridWriter.SetInputData(grid);
 gridWriter.Write();
