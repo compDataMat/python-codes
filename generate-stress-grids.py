@@ -367,7 +367,7 @@ distanceGrid.SetName("This is distance grid");
 distanceGrid.SetNumberOfValues(grid.GetNumberOfPoints());
 
 PEgrid = vtk.vtkDoubleArray();
-PEgrid.SetName("PotentialEnergy");
+PEgrid.SetName("Potential Energy");
 PEgrid.SetNumberOfValues(grid.GetNumberOfPoints());
 
 sigmaXXGrid = vtk.vtkDoubleArray();
@@ -432,7 +432,7 @@ for i in range(0,dimX):
             
             index = imageDataPE.GetScalarIndex(i,j,k);
             grid.GetPointData().GetArray("This is distance grid").SetVariantValue(index,cube[i][j][k]);
-            grid.GetPointData().GetArray("PotentialEnergy").SetVariantValue(index,imageDataPE.GetScalarComponentAsDouble(i,j,k,0))
+            grid.GetPointData().GetArray("Potential Energy").SetVariantValue(index,imageDataPE.GetScalarComponentAsDouble(i,j,k,0))
             grid.GetPointData().GetArray("sigmaXX").SetVariantValue(index,imageDataSXX.GetScalarComponentAsDouble(i,j,k,0))
             grid.GetPointData().GetArray("sigmaYY").SetVariantValue(index,imageDataSYY.GetScalarComponentAsDouble(i,j,k,0))
             grid.GetPointData().GetArray("sigmaZZ").SetVariantValue(index,imageDataSZZ.GetScalarComponentAsDouble(i,j,k,0))
